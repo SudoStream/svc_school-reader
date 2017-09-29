@@ -1,15 +1,14 @@
 package io.sudostream.schoolreader
 
-/**
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.{Http, HttpConnectionContext}
 import com.softwaremill.macwire.wire
-import io.sudostream.userreader.api.http.HttpRoutes
-import io.sudostream.userreader.api.kafka.StreamingComponents
-import io.sudostream.userreader.config.{ActorSystemWrapper, ConfigHelper}
-import io.sudostream.userreader.dao._
-**/
+import io.sudostream.schoolreader.api.http.HttpRoutes
+import io.sudostream.schoolreader.api.kafka.StreamingComponents
+import io.sudostream.schoolreader.config.{ActorSystemWrapper, ConfigHelper}
+import io.sudostream.schoolreader.dao._
+
 
 // running in IDE
 // -Djavax.net.ssl.keyStore=/etc/ssl/cacerts
@@ -17,7 +16,7 @@ import io.sudostream.userreader.dao._
 // LOCAL_MONGO_DB=true
 
 object Main extends App {
-/**
+
   System.setProperty("javax.net.ssl.keyStore", "/etc/ssl/cacerts")
   System.setProperty("javax.net.ssl.trustStore", "/etc/ssl/cacerts")
 
@@ -26,7 +25,7 @@ object Main extends App {
 
   lazy val httpRoutes: HttpRoutes = wire[HttpRoutes]
   lazy val mongoDbConnectionWrapper: MongoDbConnectionWrapper = wire[MongoDbConnectionWrapperImpl]
-  lazy val usersDao: UserReaderDao = wire[MongoDbUserReaderDao]
+  lazy val schoolsDao: SchoolReaderDao = wire[MongoDbSchoolReaderDao]
   lazy val actorSystemWrapper: ActorSystemWrapper = wire[ActorSystemWrapper]
   lazy val mongoFindQueries: MongoFindQueriesProxy = wire[MongoFindQueriesImpl]
 
@@ -44,6 +43,6 @@ object Main extends App {
     val bindingFuture = Http().bindAndHandle(httpRoutes.routes, httpInterface, httpPort, HttpConnectionContext)
     logger.info(s"Listening on $httpInterface:$httpPort")
   }
-**/
+
 }
 
