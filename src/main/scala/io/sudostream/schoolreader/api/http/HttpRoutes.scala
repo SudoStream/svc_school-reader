@@ -81,6 +81,7 @@ class HttpRoutes(dao: SchoolReaderDao,
 
         onComplete(schoolsFuture) {
           case Success(schools) =>
+            log.debug("unwrapping the schools")
             val schoolsWrapper = for {
               school <- schools
               schoolWrapper = SingleSchoolWrapper(school)

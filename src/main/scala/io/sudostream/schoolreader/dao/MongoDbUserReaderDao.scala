@@ -88,7 +88,6 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
   }
 
   def extractCountry(countryStr: String): Country = {
-    log.debug(s"Country in is '$countryStr'")
     countryStr.toUpperCase match {
       case "EIRE" => Country.EIRE
       case "ENGLAND" => Country.ENGLAND
