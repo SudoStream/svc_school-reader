@@ -96,7 +96,6 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "WALES" => Country.WALES
       case "OTHER" => Country.OTHER
       case _ => Country.UNKNOWN
-
     }
   }
 
