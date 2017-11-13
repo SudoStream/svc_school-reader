@@ -17,8 +17,8 @@ import io.sudostream.schoolreader.dao._
 
 object Main extends App {
 
-  System.setProperty("javax.net.ssl.keyStore", "/etc/ssl/cacerts")
-  System.setProperty("javax.net.ssl.trustStore", "/etc/ssl/cacerts")
+//  System.setProperty("javax.net.ssl.keyStore", "/etc/ssl/cacerts")
+//  System.setProperty("javax.net.ssl.trustStore", "/etc/ssl/cacerts")
 
   lazy val configHelper: ConfigHelper = wire[ConfigHelper]
   lazy val streamingComponents = wire[StreamingComponents]
