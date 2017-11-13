@@ -31,7 +31,7 @@ libraryDependencies ++= {
   val akkaV = "2.5.4"
   val akkaHttpVersion = "10.0.10"
   Seq(
-    "io.sudostream.timetoteach" %% "messages" % "0.0.11-15",
+    "io.sudostream.timetoteach" %% "messages" % "0.0.11-16",
 
     "com.typesafe.akka" %% "akka-actor" % akkaV,
     "com.typesafe.akka" %% "akka-stream" % akkaV,
