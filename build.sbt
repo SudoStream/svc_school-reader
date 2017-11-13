@@ -21,7 +21,7 @@ dockerCommands ++= Seq(
   // setting the run script executable
   ExecCmd("RUN",
     "chmod", "u+x",
-//    s"${(defaultLinuxInstallLocation in Docker).value}/bin/${executableScriptName.value}"),
+  //  s"${(defaultLinuxInstallLocation in Docker).value}/bin/${executableScriptName.value}"),
     s"bin/${executableScriptName.value}"),
   // setting a daemon user
   Cmd("USER", "daemon")
