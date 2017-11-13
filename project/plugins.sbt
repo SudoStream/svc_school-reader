@@ -4,6 +4,8 @@ logLevel := Level.Warn
 // Resolvers
 resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
 
+resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.ivy2/local"
+
 resolvers += Resolver.url("heroku-sbt-plugin-releases",
   url("https://dl.bintray.com/heroku/sbt-plugins/"))(Resolver.ivyStylePatterns)
 
