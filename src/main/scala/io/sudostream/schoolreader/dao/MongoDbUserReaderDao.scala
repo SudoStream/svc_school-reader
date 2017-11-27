@@ -54,6 +54,7 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "ANGUS" => LocalAuthority.SCOTLAND__ANGUS
       case "ARGYLL_AND_BUTE" => LocalAuthority.SCOTLAND__ARGYLL_AND_BUTE
       case "COMHAIRLE_NAN_EILEAN_SIAR" => LocalAuthority.SCOTLAND__COMHAIRLE_NAN_EILEAN_SIAR
+      case "EILEAN_SIAR" => LocalAuthority.SCOTLAND__COMHAIRLE_NAN_EILEAN_SIAR
       case "CLACKMANNANSHIRE" => LocalAuthority.SCOTLAND__CLACKMANNANSHIRE
       case "DUMFRIES_AND_GALLOWAY" => LocalAuthority.SCOTLAND__DUMFRIES_AND_GALLOWAY
       case "DUNDEE_CITY" => LocalAuthority.SCOTLAND__DUNDEE_CITY
@@ -65,6 +66,7 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "FALKIRK" => LocalAuthority.SCOTLAND__FALKIRK
       case "FIFE" => LocalAuthority.SCOTLAND__FIFE
       case "GLASGOW" => LocalAuthority.SCOTLAND__GLASGOW
+      case "GLASGOW_CITY" => LocalAuthority.SCOTLAND__GLASGOW
       case "HIGHLAND" => LocalAuthority.SCOTLAND__HIGHLAND
       case "INVERCLYDE" => LocalAuthority.SCOTLAND__INVERCLYDE
       case "MIDLOTHIAN" => LocalAuthority.SCOTLAND__MIDLOTHIAN
@@ -81,6 +83,8 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "STIRLING" => LocalAuthority.SCOTLAND__STIRLING
       case "WEST_DUMBARTONSHIRE" => LocalAuthority.SCOTLAND__WEST_DUMBARTONSHIRE
       case "WEST_LOTHIAN" => LocalAuthority.SCOTLAND__WEST_LOTHIAN
+      case "GRANT-MAINTAINED" => LocalAuthority.SCOTLAND__GRANT_MAINTAINED
+
       case "OTHER" => LocalAuthority.OTHER
       case _ => LocalAuthority.UNKNOWN
 
