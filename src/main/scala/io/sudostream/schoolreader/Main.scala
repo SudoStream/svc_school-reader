@@ -15,7 +15,7 @@ import io.sudostream.schoolreader.dao._
 // -Djavax.net.ssl.trustStore=/etc/ssl/cacerts
 // LOCAL_MONGO_DB=true
 
-object Main extends App {
+object Main extends App with MiniKubeHelper {
 
 //  System.setProperty("javax.net.ssl.keyStore", "/etc/ssl/cacerts")
 //  System.setProperty("javax.net.ssl.trustStore", "/etc/ssl/cacerts")

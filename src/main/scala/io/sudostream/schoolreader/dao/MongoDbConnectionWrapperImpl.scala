@@ -8,6 +8,7 @@ import akka.event.LoggingAdapter
 import akka.stream.Materializer
 import com.mongodb.connection.ClusterSettings
 import com.typesafe.config.ConfigFactory
+import io.sudostream.schoolreader.Main
 import io.sudostream.schoolreader.config.ActorSystemWrapper
 import org.mongodb.scala.connection.{NettyStreamFactoryFactory, SslSettings}
 import org.mongodb.scala.{Document, MongoClient, MongoClientSettings, MongoCollection, MongoDatabase, ServerAddress}
@@ -38,7 +39,7 @@ sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper
 
   override def getSchoolsCollection: MongoCollection[Document] = {
     def createMongoClient: MongoClient = {
-      if (isLocalMongoDb) {
+      if (isLocalMongoDb || Main.isMinikubeRun) {
         buildLocalMongoDbClient
       } else {
         log.info(s"connecting to mongo db at '${mongoDbUri.getHost}:${mongoDbUri.getPort}'")

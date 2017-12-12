@@ -15,8 +15,10 @@ trait Health {
 
   val health: Route = path("health") {
     get {
+      val appVersion = getClass.getPackage.getImplementationVersion
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`,
-        "<h1>Don't worry, she'll hold together... You hear me, baby? Hold together!</h1>"))
+        "<h1>Don't worry, she'll hold together... You hear me, baby? Hold together!</h1>\n" +
+          s"<p>version = $appVersion</p>\n"))
     }
   }
 
