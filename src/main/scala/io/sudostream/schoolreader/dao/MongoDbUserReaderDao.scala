@@ -60,6 +60,7 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "DUNDEE_CITY" => LocalAuthority.SCOTLAND__DUNDEE_CITY
       case "EAST_AYRSHIRE" => LocalAuthority.SCOTLAND__EAST_AYRSHIRE
       case "EAST_DUMBARTONSHIRE" => LocalAuthority.SCOTLAND__EAST_DUMBARTONSHIRE
+      case "EAST_DUNBARTONSHIRE" => LocalAuthority.SCOTLAND__EAST_DUMBARTONSHIRE
       case "EDINBURGH_CITY" => LocalAuthority.SCOTLAND__EDINBURGH_CITY
       case "EAST_LOTHIAN" => LocalAuthority.SCOTLAND__EAST_LOTHIAN
       case "EAST_RENFREWSHIRE" => LocalAuthority.SCOTLAND__EAST_RENFREWSHIRE
