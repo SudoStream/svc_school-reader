@@ -24,7 +24,7 @@ import org.apache.avro.io.{DatumWriter, EncoderFactory}
 import org.apache.avro.specific.SpecificDatumWriter
 import org.apache.kafka.clients.producer.ProducerRecord
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
@@ -49,13 +49,23 @@ class HttpRoutes(dao: SchoolReaderDao,
       case _ => SocialNetwork.OTHER
     }
 
+  private var cachedSchools : Option[List[School]] = None
+
   val routes: Route =
     path("api" / "schools") {
       get {
         val initialRequestReceived = Instant.now().toEpochMilli
         log.debug("Called 'api/schools' and now getting All the schools from the DAO")
 
-        val schoolsFuture = dao.extractAllSchools
+        val schoolsFuture = if ( cachedSchools.isEmpty) {
+          log.info("No cached schools, so going to database")
+          dao.extractAllSchools
+        } else {
+          log.info(s"Using cached schools, size = ${cachedSchools.size}")
+          Future {
+            cachedSchools.get
+          }
+        }
 
         Source.fromFuture(schoolsFuture)
           .map {
@@ -88,6 +98,7 @@ class HttpRoutes(dao: SchoolReaderDao,
             } yield schoolWrapper
 
             val schoolsAvro = Schools(schools = schoolsWrapper.toList)
+            cachedSchools = Some(schoolsAvro.schools.map{wrapper => wrapper.school})
             val schoolsSerializer = new SchoolsSerializer
             val schoolsSerialized = schoolsSerializer.serialize("ignore", schoolsAvro )
             complete(HttpEntity(ContentTypes.`application/octet-stream`, schoolsSerialized))
