@@ -11,7 +11,7 @@ lazy val commonSettings = Seq(
   name := "school-reader",
   organization := "io.sudostream",
   scalaVersion := "2.11.8",
-  version := "0.0.1-31",
+  version := "0.0.1-32",
 
   //docker
   dockerBaseImage := "anapsix/alpine-java:8u144b01_server-jre",
