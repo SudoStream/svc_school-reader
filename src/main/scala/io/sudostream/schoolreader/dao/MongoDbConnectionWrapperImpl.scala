@@ -42,7 +42,7 @@ sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper
       if (isLocalMongoDb || Main.isMinikubeRun) {
         buildLocalMongoDbClient
       } else {
-        log.info(s"connecting to mongo db at '${mongoDbUri.getHost}:${mongoDbUri.getPort}'")
+        log.info(s"connecting to mongo db at '${mongoDbUriString}'")
         System.setProperty("org.mongodb.async.type", "netty")
         MongoClient(mongoDbUriString)
       }
