@@ -16,7 +16,8 @@ import org.mongodb.scala.{Document, MongoClient, MongoClientSettings, MongoColle
 import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContextExecutor
 
-sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper) extends MongoDbConnectionWrapper {
+sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper) extends MongoDbConnectionWrapper
+{
 
   implicit val system: ActorSystem = actorSystemWrapper.system
   implicit val executor: ExecutionContextExecutor = system.dispatcher
@@ -37,15 +38,34 @@ sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper
 
   log.info(s"Running Local = $isLocalMongoDb")
 
-  override def getSchoolsCollection: MongoCollection[Document] = {
-    def createMongoClient: MongoClient = {
-      if (isLocalMongoDb || Main.isMinikubeRun) {
-        buildLocalMongoDbClient
-      } else {
-        log.info(s"connecting to mongo db at '${mongoDbUriString}'")
-        System.setProperty("org.mongodb.async.type", "netty")
-        MongoClient(mongoDbUriString)
-      }
+  override def getSchoolsCollection: MongoCollection[Document] =
+  {
+    def createMongoClient: MongoClient =
+    {
+      //      if (isLocalMongoDb || Main.isMinikubeRun) {
+      //        buildLocalMongoDbClient
+      //      } else {
+      log.info(s"connecting to mongo db at '${mongoDbUriString}'")
+      System.setProperty("org.mongodb.async.type", "netty")
+
+      val clusterSettings = ClusterSettings.builder().applyConnectionString() hosts(
+        List(
+          new ServerAddress("timetoteachdevmongodb-shard-00-00-sss8y.gcp.mongodb.net:27017"),
+          new ServerAddress("timetoteachdevmongodb-shard-00-01-sss8y.gcp.mongodb.net:27017"),
+          new ServerAddress("timetoteachdevmongodb-shard-00-02-sss8y.gcp.mongodb.net:27017")
+        ).asJava).description("The Atlas Cluster").build()
+
+      val settings = MongoClientSettings.builder()
+        .clusterSettings(clusterSettings)
+        .sslSettings(SslSettings.builder()
+          .enabled(true)
+          .invalidHostNameAllowed(true)
+          .build())
+        .streamFactoryFactory(NettyStreamFactoryFactory())
+        .build()
+
+      MongoClient(settings)
+      //      }
     }
 
     val mongoClient = createMongoClient
@@ -53,7 +73,8 @@ sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper
     database.getCollection(schoolsCollectionName)
   }
 
-  private def buildLocalMongoDbClient = {
+  private def buildLocalMongoDbClient =
+  {
     val mongoKeystorePassword = try {
       sys.env("MONGODB_KEYSTORE_PASSWORD")
     } catch {
@@ -82,6 +103,7 @@ sealed class MongoDbConnectionWrapperImpl(actorSystemWrapper: ActorSystemWrapper
 
 }
 
-class AcceptAllHostNameVerifier extends HostnameVerifier {
+class AcceptAllHostNameVerifier extends HostnameVerifier
+{
   override def verify(s: String, sslSession: SSLSession) = true
 }
