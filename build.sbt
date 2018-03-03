@@ -9,7 +9,7 @@ enablePlugins(DockerPlugin)
 name := "school-reader"
 organization := "io.sudostream"
 scalaVersion := "2.11.11"
-version := "0.0.1-26"
+version := "0.0.1-27"
 
 //docker
 //dockerBaseImage := "anapsix/alpine-java:8_server-jre"
@@ -55,11 +55,11 @@ libraryDependencies ++= {
 
 fork in run := true
 
-//javaOptions in run ++= Seq(
-//  "-Djavax.net.ssl.keyStore=/etc/ssl/cacerts",
-//  "-Djavax.net.ssl.keyStorePassword=the8balL",
-//  "-Djavax.net.ssl.trustStore=/etc/ssl/cacerts",
-//  "-Djavax.net.ssl.trustStorePassword=the8balL"
-//)
+javaOptions in run ++= Seq(
+  "-Djavax.net.ssl.keyStore=/etc/ssl/cacerts",
+  "-Djavax.net.ssl.keyStorePassword=the8balL",
+  "-Djavax.net.ssl.trustStore=/etc/ssl/cacerts",
+  "-Djavax.net.ssl.trustStorePassword=the8balL"
+)
 
 
