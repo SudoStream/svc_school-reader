@@ -74,7 +74,7 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "MORAY" => LocalAuthority.SCOTLAND__MORAY
       case "NORTH_AYRSHIRE" => LocalAuthority.SCOTLAND__NORTH_AYRSHIRE
       case "NORTH_LANARKSHIRE" => LocalAuthority.SCOTLAND__NORTH_LANARKSHIRE
-      case "ORKNEY" => LocalAuthority.SCOTLAND__ORKNEY
+      case "ORKNEY" | "ORKNEY_ISLANDS" => LocalAuthority.SCOTLAND__ORKNEY
       case "PERTH_AND_KINROSS" => LocalAuthority.SCOTLAND__PERTH_AND_KINROSS
       case "RENFREWSHIRE" => LocalAuthority.SCOTLAND__RENFREWSHIRE
       case "SCOTTISH_BORDERS" => LocalAuthority.SCOTLAND__SCOTTISH_BORDERS
@@ -82,12 +82,14 @@ sealed class MongoDbSchoolReaderDao(mongoFindQueriesProxy: MongoFindQueriesProxy
       case "SOUTH_AYRSHIRE" => LocalAuthority.SCOTLAND__SOUTH_AYRSHIRE
       case "SOUTH_LANARKSHIRE" => LocalAuthority.SCOTLAND__SOUTH_LANARKSHIRE
       case "STIRLING" => LocalAuthority.SCOTLAND__STIRLING
-      case "WEST_DUMBARTONSHIRE" => LocalAuthority.SCOTLAND__WEST_DUMBARTONSHIRE
+      case "WEST_DUMBARTONSHIRE" | "WEST_DUNBARTONSHIRE" => LocalAuthority.SCOTLAND__WEST_DUMBARTONSHIRE
       case "WEST_LOTHIAN" => LocalAuthority.SCOTLAND__WEST_LOTHIAN
       case "GRANT-MAINTAINED" => LocalAuthority.SCOTLAND__GRANT_MAINTAINED
 
       case "OTHER" => LocalAuthority.OTHER
-      case _ => LocalAuthority.UNKNOWN
+      case unknown =>
+        log.warning(s"Local authority is unknown - ${unknown}")
+        LocalAuthority.UNKNOWN
 
     }
   }
