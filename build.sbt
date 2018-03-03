@@ -8,12 +8,12 @@ enablePlugins(DockerPlugin)
 
 name := "school-reader"
 organization := "io.sudostream"
-scalaVersion := "2.11.11"
-version := "0.0.1-27"
+scalaVersion := "2.11.8"
+version := "0.0.1-28"
 
 //docker
-//dockerBaseImage := "anapsix/alpine-java:8_server-jre"
-dockerBaseImage := "openjdk:8-jdk"
+dockerBaseImage := "anapsix/alpine-java:8_server-jre"
+//dockerBaseImage := "openjdk:8-jdk"
 dockerRepository := Some("eu.gcr.io/time-to-teach-zone")
 dockerUpdateLatest := true
 packageName in Docker := "school-reader"
