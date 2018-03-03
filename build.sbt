@@ -9,7 +9,7 @@ enablePlugins(DockerPlugin)
 name := "school-reader"
 organization := "io.sudostream"
 scalaVersion := "2.11.11"
-version := "0.0.1-20"
+version := "0.0.1-21"
 
 //docker
 //dockerBaseImage := "anapsix/alpine-java:8_server-jre"
